@@ -31,4 +31,5 @@ function handleData(data) {
 
 function handleErr(err) {
 	const list = document.getElementById('repos')
+	list.textContent = err.message
 }
