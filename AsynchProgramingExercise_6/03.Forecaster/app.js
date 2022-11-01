@@ -38,7 +38,14 @@ async function createForecaster(code) {
   const dataUpcoming = await resUpcoming.json();
 
   const todayHtmlTemp = createToday(dataToday);
-  currentSection.appendChild(todayHtmlTemp)
+  currentSection.appendChild(todayHtmlTemp);
+
+  const upcomingHtmlTemp = createUpcoming()
+}
+
+function createUpcoming(data) {
+    const urlUpcoming = `http://localhost:3030/jsonstore/forecaster/upcoming/${data}`
+    //ToDO
 }
 
 function createToday(data) {
