@@ -1,19 +1,32 @@
+const list = document.getElementById('comments')
+const nameInput = document.querySelector('[name="name"]');
+const contentInput = document.querySelector('[name="content"]');
+
 init();
 
 function init() {
-    document.getElementById('load').addEventListener('click', async ()=>{
-        const comments = await getComments();
-        displayComments(comments);
-    });
+    document.getElementById('load').addEventListener('click',  getComments);
+    document.getElementById('send').addEventListener('click', onPost);
+
+    getComments();
+}
+async function onPost() {
+    const name = nameInput.value;
+    const content =contentInput.value;
+
+    nameInput.value = '';
+    contentInput.value = '';
+
+    const result = await postComment({ name, content });
+    list.prepend(createCommentCard(result))
 }
 
 function displayComments(comments) {
-    const list = document.getElementById('comments')
-    list.replaceChildren(...comments.map(createCommentCard))
+    list.replaceChildren(...comments.map(createCommentCard));
 }
 
 function createCommentCard(comment) {
-    const element = document.createElement('article')
+    const element = document.createElement('article');
     element.innerHTML = `<header><h3>${comment.name}</h3></header>
     <main><p>${comment.content}</p></main>`;
 
@@ -26,7 +39,8 @@ async function getComments() {
     const responce = await fetch('http://localhost:3030/jsonstore/comments');
     const data = await responce.json();
 
-    return Object.values(data)
+    const comments = Object.values(data).reverse();
+    displayComments(comments);
 }
 
 
