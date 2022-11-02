@@ -45,12 +45,27 @@ async function createForecaster(code) {
 
 function createUpcoming(data) {
     const urlUpcoming = `http://localhost:3030/jsonstore/forecaster/upcoming/${data}`
-    //ToDO
+
+    const divContainer = document.getElementById('div')
+    divContainer.classList.add('forecast-info')
+    
+}
+function generateSpans(data) {
+  const { condition, high, low } = data.forecast;
+
+    const spanHolder = document.createElement('span')
+    spanHolder.classList.add('upcoming')
+
+    const iconSpan = document.createElement('span')
+    iconSpan.classList.add('symbol')
+    iconSpan.innerHTML = enumIcon[condition]
+
+    
 }
 
 function createToday(data) {
   const { condition, high, low } = data.forecast;
-  debugger
+  
   const conditionContainer = document.createElement("div");
   conditionContainer.classList.add("forecast");
 
