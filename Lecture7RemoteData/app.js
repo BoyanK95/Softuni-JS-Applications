@@ -7,6 +7,7 @@ init();
 function init() {
     document.getElementById('load').addEventListener('click',  getComments);
     document.getElementById('send').addEventListener('click', onPost);
+    list.addEventListener('click', onCommentClick)
 
     getComments();
 }
@@ -28,7 +29,7 @@ function displayComments(comments) {
 function createCommentCard(comment) {
     const element = document.createElement('article');
     element.innerHTML = `<header><h3>${comment.name}</h3></header>
-    <main><p>${comment.content}</p></main>`;
+    <main><p>${comment.content}</p><button>X</button></main>`;
 
     element.id = comment._id;
 
@@ -60,10 +61,30 @@ async function postComment(comment) {
     return data
 }
 
+function onCommentClick(e) {
+    if (e.target.tagName == 'BUTTON') {
+        const choice = confirm('Are you sure you want to delete this comment?');
+        if (choice) {
+            const commentId = e.target.parentElement.parentElement.id;
+            deleteComment(commentId);
+        }
+    }
+}
+
 async function deleteComment(id) {
-    const responce = await fetch('http://localhost:3030/jsonstore/comments/' + id , {
+    await fetch('http://localhost:3030/jsonstore/comments/' + id , {
         method: 'delete'
     });
-    const element = document.getElementById(id).remove()
+    document.getElementById(id).remove()
+}
 
+async function updateComment(id, comment) {
+    await fetch('http://localhost:3030/jsonstore/comments/' + id , {
+        method: 'put',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(comment)
+    });
+    return responce.json()
 }
