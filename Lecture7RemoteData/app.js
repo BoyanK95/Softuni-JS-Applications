@@ -30,6 +30,8 @@ function createCommentCard(comment) {
     element.innerHTML = `<header><h3>${comment.name}</h3></header>
     <main><p>${comment.content}</p></main>`;
 
+    element.id = comment._id;
+
     return element
 }
 
@@ -56,4 +58,12 @@ async function postComment(comment) {
     const data = await responce.json()
 
     return data
+}
+
+async function deleteComment(id) {
+    const responce = await fetch('http://localhost:3030/jsonstore/comments/' + id , {
+        method: 'delete'
+    });
+    const element = document.getElementById(id).remove()
+
 }
