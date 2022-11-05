@@ -7,3 +7,20 @@ export async function getAllRecipe(params) {
 
     return recipies
 }
+
+function displayRecipes(recipies) {
+   const cards = recipies.map(createRecipeCard)
+
+   const fragment = document.createDocumentFragment()
+
+   for (let item of cards) {
+        fragment.appendChild(item)
+   }
+}
+
+function createRecipeCard(recipe) {
+    const element = document.createElement('li')
+    element.textContent = recipe.name
+
+    return element
+}
