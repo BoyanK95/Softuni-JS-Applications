@@ -4,6 +4,7 @@
 //send login info to REST serv
 //store authorization token
 
+import { chekUserNav } from "./auth.js";
 import { showCatalogView } from "./catalog.js";
 
 document.getElementById("login-link").addEventListener("click", showLoginView);
@@ -23,6 +24,7 @@ async function onLogin(ev) {
 
   try{
     await login(email, password)
+    chekUserNav()
     showCatalogView()
   } catch(err){
     alert(err.message)

@@ -1,37 +1,59 @@
+nav div {
+    display: inline-block;
+}
+
 nav a{
     padding: 17px;
     font-size: 19px;
+    text-decoration: none;
+}
+
+nav a:hover {
+    background-color: #6c8b47;
+    color: white;
+}
+
+#welcome-msg{
+    margin: 20px 70px;
+    font-size: 19px;
+    font-weight: bold;
 }
 section {
 display: none;
 }
+
 label{
 display: block;
 }
+
 #catalog-view{
 background-color: rgb(156, 224, 239);
 padding: 32px 17px;
 border-radius: 12px;
 font-size: 20px;
 }
+
 #details-view{
 background-color: rgb(134, 218, 185);
 padding: 32px 17px;
 border-radius: 12px;
 font-size: 20px;
 }
+
 #login-view{
 background-color: rgb(218, 190, 134);
 padding: 32px 17px;
 border-radius: 12px;
 font-size: 20px;
 }
+
 #register-view{
 background-color: rgb(218, 152, 134);
 padding: 32px 17px;
 border-radius: 12px;
 font-size: 20px;
 }
-.user,.guest{
+
+.guest{
 display: none;
 }
