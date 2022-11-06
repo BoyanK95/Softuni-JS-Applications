@@ -14,13 +14,15 @@ async function loadCommits() {
       throw new Error(`${res.status} ${res.statusText}`);
     }
     const data = await res.json();
-    const items = data.map( repo => {
+    const items = data.map(createLiEl)
+
+    function createLiEl(repo) {
         const liEl = document.createElement('li')
         liEl.textContent = `${repo.commit.author.name}: ${repo.commit.message}`
         
         return liEl
-    })
-
+    }
+    
     list.replaceChildren(...items)
     
     // list.innerHTML = ''
