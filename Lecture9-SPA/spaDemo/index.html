@@ -1,33 +1,37 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>My Cookbook</title>
     <script src="/src/app.js" type="module"></script>
     <!-- <link rel="stylesheet" href="style/site.css">
     <link rel="stylesheet" href="style/recipe.css"> -->
     <style>
-        section{
-            display: none;
-        }
+      section {
+        display: none;
+      }
     </style>
-</head>
-<body>
+  </head>
+  <body>
+      <h1>SPA Demo</h1>
     <section id="catalog-view">
         <h2>All Recipes</h2>
-        <ul id="recipe-list">
-            <li>First recipe</li>
-            <li>Second recipe</li>
-        </ul>
+      <ul id="recipe-list">
+        <li>First recipe</li>
+        <li>Second recipe</li>
+      </ul>
     </section>
 
     <section id="details-view">
-        <h2>Recipe Details</h2>
+      <h2 id="recipe-name">Recipe Details</h2>
 
-        <p>Ingredients</p>
-        <p>Preparation steps</p>
+      <p>Ingredients:</p>
+      <ul id="recipe-ingredients"></ul>
+
+      <p>Preparation steps:</p>
+      <ul id="recipe-steps"></ul>
     </section>
-</body>
+  </body>
 </html>

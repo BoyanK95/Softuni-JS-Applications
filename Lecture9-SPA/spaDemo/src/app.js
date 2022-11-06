@@ -1,6 +1,9 @@
-import { getAllRecipe } from './catalog.js'
+import { showCatalogView } from './catalog.js'
 
-window.api = {
-    getAllRecipe
-}
+showCatalogView()
+
+
+
+
+
  
