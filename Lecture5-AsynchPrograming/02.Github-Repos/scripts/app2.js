@@ -1,13 +1,16 @@
 function loadRepos() {
   //read input field
-  const username = document.getElementById("username").value;
+  const usernameInput = document.getElementById("username")
+  const username = usernameInput.value;
   const ulElement = document.getElementById("repos");
+  
 
   //send request
   fetch(`https://api.github.com/users/${username}/repos`)
     .then(handleResponce)
     .then(displayRepos)
     .catch(handleError)
+    .finally(refreshDisplay)
 
     function handleResponce(res) {
         if (res.ok == false) {
@@ -34,5 +37,9 @@ function loadRepos() {
 
  function handleError(err) {
     ulElement.innerHTML = `${err.message}`
+ }
+
+ function refreshDisplay() {
+    usernameInput.value = ''
  }
 }
