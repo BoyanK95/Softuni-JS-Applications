@@ -6,13 +6,41 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>My Cookbook</title>
     <script src="/src/app.js" type="module"></script>
-    <!-- <link rel="stylesheet" href="style/site.css">
-    <link rel="stylesheet" href="style/recipe.css"> -->
+    <!-- <!-- <link rel="stylesheet" href="style/site.css" -->
+    <!-- <link rel="stylesheet" href="style/recipe.css"> -->
     <style>
       section {
         display: none;
       }
+      label{
+        display: block;
+      }
+      #catalog-view{
+        background-color: rgb(156, 224, 239);
+        padding: 32px 17px;
+        border-radius: 12px;
+        font-size: 20px;
+      }
+      #details-view{
+        background-color: rgb(134, 218, 185);
+        padding: 32px 17px;
+        border-radius: 12px;
+        font-size: 20px;
+      }
+      #login-view{
+        background-color: rgb(218, 190, 134);
+        padding: 32px 17px;
+        border-radius: 12px;
+        font-size: 20px;
+      }
+      #register-view{
+        background-color: rgb(218, 152, 134);
+        padding: 32px 17px;
+        border-radius: 12px;
+        font-size: 20px;
+      }
     </style>
+
   </head>
   <body>
       <h1>SPA Demo</h1>
@@ -37,6 +65,16 @@
 
       <p>Preparation steps:</p>
       <ul id="recipe-steps"></ul>
+    </section>
+
+    <section id="login-view">
+        <h2>Login</h2>
+
+        <form id="login-form">
+            <label>Email: <input type="text" name="email" id=""></label>
+            <label>Password: <input type="password" name="password" id=""></label>
+            <button>Login</button>
+        </form>
     </section>
   </body>
 </html>
