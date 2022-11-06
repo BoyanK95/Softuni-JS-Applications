@@ -5,13 +5,21 @@ document
   const displayArea = document.getElementById('charachters-area')
 
   async function asyncLoadCharachter() {
-    const res = await fetch(`https://swapi.dev/api/people/` + document.getElementById('idNum').value)
-    const data = await res.json()
-    console.log(data);
-    let personName = JSON.stringify(data.name);
-    let personHeight = JSON.stringify(data.height);
+    try{
+      const res = await fetch(`https://swapi.dev/api/people/` + document.getElementById('idNum').value)
+      if (res.ok == false) {
+        throw new Error(`Request error !`)
+      }
+      const data = await res.json()
+      console.log(data);
+      let personName = JSON.stringify(data.name);
+      let personHeight = JSON.stringify(data.height);
+  
+      displayArea.value = `This ${personName} is ${personHeight}m tall and has ${data.skin_color} skin and is of ${data.gender} gender!`
+    } catch (err) {
+      alert(err.message)
+    }
 
-    displayArea.value = `This ${personName} is ${personHeight}m tall and has ${data.skin_color} skin and is of ${data.gender} gender!`
   }
 
 function loadCharachter() {
