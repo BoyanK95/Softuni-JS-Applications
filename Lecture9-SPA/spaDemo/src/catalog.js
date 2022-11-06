@@ -4,6 +4,7 @@ import { showDetailsView } from "./details.js"
 //parse and display each recipe
 
 document.getElementById('recipe-list').addEventListener('click', openRecipe)
+document.getElementById('catalog-link').addEventListener('click', showCatalogView)
 
 export async function showCatalogView() {
     [...document.querySelectorAll('section')].forEach(s=> s.style.display = 'none')
