@@ -6,7 +6,7 @@ async function getInfo() {
     const busList = document.getElementById('buses')
     
     busList.innerHTML = ''
-    stopId.value = ''
+    stopIDInput.value = ''
     try{
         const responce = await fetch(url)
         const data = await responce.json()
