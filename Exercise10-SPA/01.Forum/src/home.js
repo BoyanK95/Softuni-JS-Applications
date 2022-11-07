@@ -25,7 +25,7 @@ function topicTamplete(data) {
     container.innerHTML = `
     <div class="topic-name-wrapper">
         <div class="topic-name">
-            <a href="#" class="normal">
+            <a href="#" class="normal" id="${data._id}">
                 <h2>${data.topicName}</h2>
             </a>
             <div class="columns">
