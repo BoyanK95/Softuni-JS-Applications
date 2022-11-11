@@ -1,8 +1,7 @@
- import { showHome } from "./src/home"
+import { showHome } from "./src/home.js"
 
 const main = document.getElementById('mainView')
 
-const homeView = document.getElementById('homeView')
 const registerView = document.getElementById('registerView')
 const loginView = document.getElementById('loginView')
 const dashboard = document.getElementById('dashboard-holder')
@@ -11,7 +10,7 @@ const createView = document.getElementById('createView')
 const defSection = document.getElementById('defSection').remove()
 
 const link = {
-    '/': homeView,
+    '/': showHome,
     '/catalog': dashboard,
     '/login': loginView,
     '/register': registerView,
@@ -19,6 +18,15 @@ const link = {
     '/create': createView,
 }
 
+const context = {
+    showSection
+}
+
+window.showHome = showHome
+window.context = context
+
 function showSection(section) {
     main.replaceChildren(section)
 }
+
+// showHome(context)

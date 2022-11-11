@@ -1,6 +1,6 @@
 const section = document.getElementById('homeView')
 
 
-export function showHome() {
-    main.appendChild(section)
+export function showHome(context) {
+    context.showSection(section)
 }
