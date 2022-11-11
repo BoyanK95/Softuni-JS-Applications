@@ -6,15 +6,16 @@ import { showLogin } from "./src/views/login.js"
 import { showRegister } from "./src/views/register.js"
 
 const main = document.getElementById('mainView')
+document.querySelector('nav').addEventListener('click', onNavigate)
 
 // const registerView = document.getElementById('registerView')
 // const loginView = document.getElementById('loginView')
 // const dashboard = document.getElementById('dashboard-holder')
 // const detailsView = document.getElementById('detailsView')
 // const createView = document.getElementById('createView')
-const defSection = document.getElementById('defSection').remove()
+document.getElementById('defSection').remove()
 
-const link = {
+const links = {
     '/': showHome,
     '/catalog': showCatalog,
     '/login': showLogin,
@@ -33,4 +34,21 @@ function showSection(section) {
     main.replaceChildren(section)
 }
 
-// showHome(context)
+function onNavigate(e) {
+    e.preventDefault()
+    let target = e.target
+    if (target.tagName == 'IMG') {
+        target = target.parentElement
+    }
+    if (target.tagName == 'A') {
+        const url = new URL(target.href)
+        goTo(url.pathname)
+    }
+}
+
+function goTo(name) {
+    const handler = links[name]
+    if (typeof handler === 'function') {
+        handler(context)
+    }
+}
