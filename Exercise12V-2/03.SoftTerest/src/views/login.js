@@ -20,6 +20,6 @@ async function onSubmit(e) {
     const {email, password} = Object.fromEntries(formData)
 
     await login(email, password)
-    
+    ctx.updateNavigate()
     ctx.goTo('/')
 }

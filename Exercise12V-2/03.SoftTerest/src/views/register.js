@@ -21,6 +21,7 @@ async function onSubmit(e) {
         alert('password does not match')
     }else{
         await register(email, password)
-        ctx.goTo('/')
+        ctx.updateNavigate()
+        ctx.goTo('/catalog')
     }
 }
