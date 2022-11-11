@@ -7,7 +7,7 @@ const endpoint = {
 }
 
 export async function login(email, password) {
-    const user = await api.get(endpoint.login, {email, password})
+    const user = await api.post(endpoint.login, {email, password})
     sessionStorage.setItem('user', JSON.stringify(user))
 }
 

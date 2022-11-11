@@ -1,3 +1,5 @@
-import * as api from './src/api/api.js'
+import {login, register, logout} from './src/api/user.js'
 
-window.myApi = api
+window.login = login
+window.register = register
+window.logout = logout
