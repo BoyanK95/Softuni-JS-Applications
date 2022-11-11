@@ -21,7 +21,7 @@ const links = {
 }
 
 const router = initialize(links)
-
+router.updateNavigate()
 router.goTo('/')
 
 
