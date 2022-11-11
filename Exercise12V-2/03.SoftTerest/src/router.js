@@ -28,7 +28,7 @@ export function initialize(links) {
     
     function goTo(name) {
         const handler = links[name]
-        if (typeof handler === 'function') {
+        if (typeof(handler) === 'function') {
             handler(context)
         }
     }

@@ -17,19 +17,19 @@ export async function showCatalog(context) {
 }
 
 function createIdea(idea) {
-    const div = document.createElement('div')
-    div.classList = "card overflow-hidden current-card details"
-    div.style.width = '20rem'
-    div.style.height = '18rem'
+    
+    const div = document.createElement("div");
+    div.classList = "card overflow-hidden current-card details";
+    div.style.width = "20rem"
+    div.style.height = "18rem";
 
     div.innerHTML = `
-          <div class="card-body">
-            <p class="card-text">${idea.title}</p>
-        </div>
-        <img class="card-image" src="${idea.img}" alt="Card image cap"/>
-        <a class="btn" href="/details">Details</a>
+                <div class="card-body">
+                    <p class="card-text">${idea.title}</p>
+                </div>
+                <img class="card-image" src=${idea.img} alt="Card image cap">
+                <a data-id=${idea._id} class="btn" href="/details">Details</a>
     `
-
     return div
 }
 
