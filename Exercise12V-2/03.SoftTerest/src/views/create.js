@@ -14,7 +14,7 @@ async function onSubmit(e){
     e.preventDefault();
     const formData = new FormData(form);
     const {title, description, imageURL} = Object.fromEntries(formData);
-
+    debugger
     await createIdea({title, description, img: imageURL});
     form.reset();
     ctx.goTo("/catalog");

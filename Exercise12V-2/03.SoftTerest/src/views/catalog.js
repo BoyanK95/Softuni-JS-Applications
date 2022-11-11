@@ -1,14 +1,17 @@
-import { getAllIdea } from "../api/data.js"
+import { getAllIdea } from "../api/data.js";
 
-const section = document.getElementById('dashboard-holder')
+const section = document.getElementById("dashboard-holder");
+//new
+section.addEventListener("click", onDetailSelect)
+let ctx = null
 
+export async function showCatalog(context){
+    ctx = context;
+    context.showSection(section);
+    
+    const ideas = await getAllIdea();
 
-export async function showCatalog(context) {
-    context.showSection(section)
-
-    const ideas = await getAllIdea()
-
-    if (ideas.length === 0) {
+    if (ideas.length === 0){
         section.innerHTML = `<h1>No ideas yet! Be the first one :)</h1>`
     } else {
         section.replaceChildren(...ideas.map(createIdea))
@@ -33,18 +36,11 @@ function createIdea(idea) {
     return div
 }
 
-
-{/* <div
-class="card overflow-hidden current-card details"
-style="width: 20rem; height: 18rem"
->
-<div class="card-body">
-  <p class="card-text">4 easy DIY ideas to try!</p>
-</div>
-<img
-  class="card-image"
-  src="./images/brightideacropped.jpg"
-  alt="Card image cap"
-/>
-<a class="btn" href="">Details</a>
-</div> */}
+//new
+function onDetailSelect (e) {
+    if (e.target.tagName === "A") {
+        e.preventDefault();
+        const id = e.target.dataset.id
+        ctx.goTo("/details", id)
+    }
+}

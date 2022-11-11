@@ -19,9 +19,9 @@ const links = {
     '/register': showRegister,
     '/details': showDetails,
     '/create': showCreate,
-    "/logout": async function () {
+    '/logout': async function () {
         await logout()
-        router.goTo("/")
+        router.goTo('/')
         router.updateNavigate()
     }
 }

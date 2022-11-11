@@ -2,7 +2,6 @@ import { login } from '../api/user.js'
 
 const section = document.getElementById('loginView')
 const form = section.querySelector('form')
-
 form.addEventListener('submit', onSubmit)
 
 let ctx = null
