@@ -1,4 +1,4 @@
-import * as router from "./src/router.js"
+import { initialize } from "./src/router.js"
 import { showCatalog } from "./src/views/catalog.js"
 import { showCreate } from "./src/views/create.js"
 import { showDetails } from "./src/views/details.js"
@@ -20,7 +20,9 @@ const links = {
     '/create': showCreate,
 }
 
-router.initialize(links)
+const router = initialize(links)
+
+router.goTo('/')
 
 
 
