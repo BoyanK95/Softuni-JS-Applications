@@ -4,7 +4,7 @@ import { html, render } from './node_modules/lit-html/lit-html.js'
 const tableRow = ({name, id}) => html`
 <tr>
     <td>${name}</td>
-    <td><button>Delete</button></td>
+    <td><button @click=${onDelete.bind(null, id)}>Delete</button></td>
 </tr>`
 
 const data = [
@@ -24,11 +24,14 @@ const data = [
 
 const table = (items) => html`
 <table>
-    ${tableRow(items[0])}
-    ${tableRow(items[1])}
-    ${tableRow(items[2])}
+    ${items.map(tableRow)}
 </table>`
 
 const root = document.querySelector('main')
 
 render(table(data),root)
+
+function onDelete(id) {
+    data.splice(data.findIndex(x => x.id == id),1)
+    render(table(data), root)
+}
