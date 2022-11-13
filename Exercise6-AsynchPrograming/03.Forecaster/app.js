@@ -1,100 +1,88 @@
-const enumIcon = {
-  "Sunny": "&#x2600", // ☀
-  "Partly sunny": "&#x26C5", // ⛅
-  "Overcast": "&#x2601", // ☁
-  "Rain": "&#x2614", // ☂
-  "Degrees": "&#176", // °
-};
-
 function attachEvents() {
-  document.getElementById("submit").addEventListener("click", getWeather);
-}
-async function getWeather() {
-  const url = "http://localhost:3030/jsonstore/forecaster/locations";
-  const cityName = document.getElementById("location").value;
+  const baseUrl = 'http://localhost:3030/jsonstore/forecaster';
+  const forecastDiv = document.querySelector('#forecast');
+  const currentDiv = document.querySelector('#current');
+  const upcomingDiv = document.querySelector('#upcoming');
+  let todaysDiv = createTag('div', null, 'forecasts');
+  let threeDayForecast = createTag('div', null, 'forecast-info');
 
-  const responce = await fetch(url);
-  const data = await responce.json();
+  const symbols = {
+      'Sunny': '☀',
+      'Partly sunny': '⛅',
+      'Overcast': '☁',
+      'Rain': '☂',
+      'Degrees': '°'
 
-  const info = data.find((x) => x.name === cityName);
+  }
+  const submitButton = document.querySelector('#submit');
+  submitButton.addEventListener('click', onClick);
 
-  createForecaster(info.code);
-}
+  async function onClick() {
+      todaysDiv.innerHTML = '';
+      threeDayForecast.innerHTML = '';
+      let location = document.querySelector('#location').value;
 
-async function createForecaster(code) {
-  const currentSection = document.getElementById("current");
-  const forecastContainer = document.getElementById('forecast')
-  forecastContainer.style.display = 'block';
+      try {
 
-  const urlToday = `http://localhost:3030/jsonstore/forecaster/today/${code}`;
-  const urlUpcoming = `http://localhost:3030/jsonstore/forecaster/upcoming/${code}`;
+          let result = await fetch(`${baseUrl}/locations`);
+          let data = await result.json();
 
-  //TODO use Promise.all
+          let searched = data.find(l => l.name == location);
 
-  const resToday = await fetch(urlToday);
-  const dataToday = await resToday.json();
+          let todayForecast = await fetch(`${baseUrl}/today/${searched.code}`);
+          let todaysData = await todayForecast.json();
 
-  const resUpcoming = await fetch(urlUpcoming);
-  const dataUpcoming = await resUpcoming.json();
+          let upcoming = await fetch(`${baseUrl}/upcoming/${searched.code}`);
+          let upcomingData = await upcoming.json();
 
-  const todayHtmlTemp = createToday(dataToday);
-  currentSection.appendChild(todayHtmlTemp);
+          displayTodaysData(todaysData);
+          displayUpcomingData(upcomingData);
 
-  const upcomingHtmlTemp = createUpcoming()
-}
 
-function createUpcoming(data) {
-    const urlUpcoming = `http://localhost:3030/jsonstore/forecaster/upcoming/${data}`
+      } catch (error) {
+          todaysDiv.innerHTML = '';
+          threeDayForecast.innerHTML = '';
+          forecastDiv.style.display = 'block';
+          let errorSpan = document.createElement('span');
+          errorSpan.textContent = 'Error';
+          forecastDiv.appendChild(errorSpan);
+      }
 
-    const divContainer = document.getElementById('div')
-    divContainer.classList.add('forecast-info')
-    
-}
-function generateSpans(data) {
-  const { condition, high, low } = data.forecast;
+  }
+  function displayTodaysData(object) {
+      forecastDiv.style.display = 'block';
 
-    const spanHolder = document.createElement('span')
-    spanHolder.classList.add('upcoming')
+      todaysDiv.appendChild(createTag('span', symbols[object.forecast.condition], 'condition symbol'));
 
-    const iconSpan = document.createElement('span')
-    iconSpan.classList.add('symbol')
-    iconSpan.innerHTML = enumIcon[condition]
+      let dataSpan = createTag('span', null, 'condition');
+      dataSpan.appendChild(createTag('span', object.name, 'forecast-data'));
+      dataSpan.appendChild(createTag('span', `${object.forecast.low}°/${object.forecast.high}°`, 'forecast-data'));
+      dataSpan.appendChild(createTag('span', `${object.forecast.condition}`, 'forecast-data'));
 
-    
-}
+      todaysDiv.appendChild(dataSpan);
+      currentDiv.appendChild(todaysDiv);
 
-function createToday(data) {
-  const { condition, high, low } = data.forecast;
-  
-  const conditionContainer = document.createElement("div");
-  conditionContainer.classList.add("forecast");
+  }
 
-  const conditionIconSpan = document.createElement("span");
-  conditionIconSpan.classList.add("condition", 'symbol');
-  conditionIconSpan.innerHTML = enumIcon[condition];
+  function displayUpcomingData(object) {
 
-  const conditionSpan = document.createElement("span");
-  conditionSpan.classList.add("condition");
+      for (const day of object.forecast) {
+          let spanElement = createTag('span', null, 'upcoming');
+          spanElement.appendChild(createTag('span', symbols[day.condition], 'symbol'));
+          spanElement.appendChild(createTag('span', `${day.low}°/${day.high}°`, 'forecast-data'));
+          spanElement.appendChild(createTag('span', `${day.condition}`, 'forecast-data'));
 
-  const nameSpan = document.createElement("span");
-  nameSpan.classList.add("forecast-data");
-  nameSpan.textContent = data.name;
+          threeDayForecast.appendChild(spanElement);
+      }
 
-  const tempSpan = document.createElement("span");
-  tempSpan.classList.add("forecast-data");
-  tempSpan.innerHTML = `${low}${enumIcon["Degrees"]}/${high}${enumIcon["Degrees"]}`;
-
-  const conditionTxtSpan = document.createElement("span");
-  conditionTxtSpan.classList.add("forecast-data");
-  conditionTxtSpan.textContent = condition;
-
-  conditionSpan.appendChild(nameSpan);
-  conditionSpan.appendChild(tempSpan);
-  conditionSpan.appendChild(conditionTxtSpan);
-
-  conditionContainer.appendChild(conditionIconSpan);
-  conditionContainer.appendChild(conditionSpan);
-  return conditionContainer;
+      upcomingDiv.appendChild(threeDayForecast);
+  }
+  function createTag(tag, text, className) {
+      let el = document.createElement(tag);
+      if (text) { el.textContent = text; }
+      if (className) { el.className = className; }
+      return el;
+  }
 }
 
 attachEvents();
