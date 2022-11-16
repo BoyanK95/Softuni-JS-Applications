@@ -1,7 +1,6 @@
 //Detect URL changes notify application
 //Change URL on application content swap
 
-
 const views = {
     '/': () => '<h2>Home Page</h2>',
     '/catalog': () => '<h2>Catalog</h2>',
@@ -10,7 +9,7 @@ const views = {
 
 const main = document.querySelector('main')
 document.querySelector('nav').addEventListener('click',onNavigate)
-window.addEventListener('popstate', ()=> onPopState)
+window.addEventListener('popstate', onPopState)
 
 onPopState()
 
@@ -20,15 +19,13 @@ function onNavigate(e) {
         if (showView(url.pathname)) {
             e.preventDefault()
             history.pushState(null, '', url.pathname)
-            debugger
         }
     }
 }
 
-function onPopState(params) {
+function onPopState() {
     //Start application in home view
     const startingView = window.location.pathname
-    debugger
     showView(startingView)
 }
 
