@@ -1,3 +1,3 @@
-export function showContact() {
-    document.querySelector('main').innerHTML = '<h2>Contacts us</h2>'
+export function showContact(ctx) {
+    ctx.render('<h2>Contacts us</h2>') 
 }

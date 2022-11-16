@@ -1,3 +1,3 @@
-export function notFount() {
-    document.querySelector('main').innerHTML = `<h2>404 Not Found</h2>`
+export function notFount(ctx) {
+    ctx.render(`<h2>404 Not Found</h2>`) 
 }
