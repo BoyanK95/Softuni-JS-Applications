@@ -22,9 +22,23 @@ page('/my-furniture', renderMiddleware, myFurnitureView)
 page('*', catalogView)
 
 page.start()
+updateNav()
 
+function updateNav() {
+    const userSection = document.getElementById('user')
+    const guestSection = document.getElementById('guest')
+    const userData = JSON.parse(sessionStorage.getItem('userData'))
+    if (userData) {
+        userSection.style.display = 'inline-block'
+        guestSection.style.display = 'none'
+    } else {
+        userSection.style.display = 'none'
+        guestSection.style.display = 'inline-block'
+    }
+}
 
 function renderMiddleware(ctx, next) {
     ctx.render = (content) => render(content, root)
+    ctx.updateNav = updateNav
     next()
 }
