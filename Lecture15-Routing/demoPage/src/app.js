@@ -1,4 +1,5 @@
 import page from '../node_modules/page/page.mjs'
+import { render } from '../node_modules/lit-html/lit-html.js'
 import { showAbout } from './views/about.js'
 import { showCatalog } from './views/catalog.js'
 import { showContact } from './views/contact.js'
