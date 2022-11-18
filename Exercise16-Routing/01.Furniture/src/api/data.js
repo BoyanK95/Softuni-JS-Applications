@@ -43,7 +43,7 @@ export async function getItemById(id) {
     return res
 }
 
-export async function updateByID(id) {
+export async function updateByID(id, data) {
     const res = await api.post(endpoint.getItemById + id, data)
     return res
 }

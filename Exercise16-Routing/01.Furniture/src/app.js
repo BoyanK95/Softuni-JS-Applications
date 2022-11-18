@@ -7,6 +7,7 @@ import { loginView } from "./views/login.js";
 import { myFurnitureView } from "./views/myFurniture.js";
 import { registerView } from "./views/register.js";
 import { render } from '../node_modules/lit-html/lit-html.js';
+import { logout } from './api/data.js'
 
 const root = document.querySelector('.container')
 
@@ -23,6 +24,13 @@ page('*', catalogView)
 
 page.start()
 updateNav()
+
+document.getElementById('logoutBtn').addEventListener('click', async () => {
+    debugger
+    await logout()
+    updateNav()
+    page.redirect('/')
+})
 
 function updateNav() {
     const userSection = document.getElementById('user')
