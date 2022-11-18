@@ -1,21 +1,22 @@
 import { html } from "../../node_modules/lit-html/lit-html.js";
 import { register } from '../api/data.js'
 
-let page = null
+let context = null
 export async function registerView(ctx) {
-    page = ctx.page
+    context = ctx
     ctx.render(createRegisterTemp(onSubmit))
 }
 
-function onSubmit(e) {
+async function onSubmit(e) {
     e.preventDefault()
     const formData = new FormData(e.target)
     const {email, password, rePass} = Object.fromEntries(formData)
 
     //validation form!
 
-    register(email, password)
-    page.redirect('/')
+    await register(email, password)
+    context.updateNav()
+    context.page.redirect('/')
 }
 
 function createRegisterTemp(handler) {

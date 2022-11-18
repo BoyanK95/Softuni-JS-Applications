@@ -9,8 +9,9 @@ async function request(url, options) {
             throw new Error(err.message)
         }
         try{
+            
             if (response.status === 204) {
-                return data
+                return response
             }
             const data = response.json()
             return data

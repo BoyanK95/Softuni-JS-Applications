@@ -26,13 +26,12 @@ page.start()
 updateNav()
 
 document.getElementById('logoutBtn').addEventListener('click', async () => {
-    debugger
     await logout()
     updateNav()
     page.redirect('/')
 })
 
-function updateNav() {
+ function updateNav() {
     const userSection = document.getElementById('user')
     const guestSection = document.getElementById('guest')
     const userData = JSON.parse(sessionStorage.getItem('userData'))
