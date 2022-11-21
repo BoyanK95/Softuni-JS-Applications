@@ -32,6 +32,7 @@ function getOption(method, body) {
     }
 
     const user = JSON.parse(sessionStorage.getItem('userData')) 
+    
     if (user) {
         const token = user.accessToken
         options.headers['X-Authorization'] = token
