@@ -6,6 +6,7 @@ import { showContact } from './views/contact.js'
 import { showDetails } from './views/details.js'
 import { showHome } from './views/home.js'
 import { notFount } from './views/notFound.js'
+import { showCreate } from './views/create.js'
 
 function decorateContext(ctx, next) {
     ctx.render = function (content) {
@@ -17,8 +18,9 @@ function decorateContext(ctx, next) {
 page(decorateContext)
 page('/index.html', '/')
 page('/', showHome)
-page('/catalog', showCatalog)
-page('/catalog/:categoryId/:productId', showDetails)
+page('/recipes', showCatalog)
+page('/create', showCreate)
+page('/recipes/:Id', showDetails)
 page('/about', showAbout)
 page('/contact*',showContact)
 page('*', notFount)

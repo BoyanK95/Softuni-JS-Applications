@@ -1,8 +1,8 @@
 import { get } from "./api.js"
 
 const endpoints = {
-    'recipes': '/data/recipe',
-    'byId': '/data/recipe',
+    'recipes': '/data/recipes',
+    'byId': '/data/recipes/',
 }
 
 export async function getAll() {
