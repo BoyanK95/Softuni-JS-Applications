@@ -9,7 +9,7 @@ import { notFount } from './views/notFound.js'
 
 function decorateContext(ctx, next) {
     ctx.render = function (content) {
-    document.querySelector('main').innerHTML = content
+    render(content, document.querySelector('main'))
     }
     next()
 }
