@@ -1,4 +1,4 @@
-import { getUserData } from "./util.js"
+import { getUserData } from "../util.js"
 
 const host = 'http://localhost:3030/'
 
@@ -28,7 +28,7 @@ async function request(method, url, data) {
         const result = await responce.json()
 
         if (responce.ok == false) {
-            throw new Error(responce.message)
+            throw new Error(result.message)
         }
         return result
 
