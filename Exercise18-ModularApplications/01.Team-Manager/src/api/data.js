@@ -35,7 +35,7 @@ export async function getAllTeams() {
 }
 
 export async function getAllMembers() {
-    const res = await api.getAllMembers(endpoint.getAllMembers)
+    const res = await api.get(endpoint.getAllMembers)
     return res
 }
 
