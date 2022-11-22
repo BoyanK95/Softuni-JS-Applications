@@ -13,10 +13,11 @@ async function onSubmit(e) {
     const {email, password} = Object.fromEntries(formData)
     try {
         await login(email,password)
+        contenxt.updateNav()
+        contenxt.page.redirect('/')
     } catch (error) {
         return contenxt.render(createLoginTemplate(error.message))
     }
-    contenxt.page.redirect('/')
 }
 
 function createLoginTemplate(error) {
