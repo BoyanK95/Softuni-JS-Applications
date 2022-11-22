@@ -14,6 +14,7 @@ async function onSubmit(e) {
     try {
         const responce = await createTeam(name, logoUrl, description)
         context.updateNav()
+        context.page.redirect(`details/${responce._id}`)
     } catch (error) {
         return context.render(createTeamTemp(error.message))
     }
