@@ -1,5 +1,5 @@
 
 
-export async function editView(ctx) {
-    console.log('editView');
+export async function createView(ctx) {
+    console.log('createView');
 }

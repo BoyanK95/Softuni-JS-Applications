@@ -6,8 +6,9 @@ import { registerView } from './views/registerView.js'
 import { loginView } from './views/loginview.js'
 import { teamHomeView } from './views/teamHomeView.js'
 import { browserView } from './views/browserView.js'
-import { editView } from './views/createView.js'
+import { editView } from './views/editView.js'
 import { myteamView } from './views/myTeamView.js'
+import { createView } from './views/createView.js'
 
 const rootEl = document.getElementsByTagName('main')[0]
 
@@ -18,6 +19,7 @@ page('/index.html',middleWare, homeView)
 page('/login',middleWare, loginView)
 page('/register',middleWare, registerView)
 page('/browse',middleWare, browserView)
+page('/create',middleWare, createView)
 page('/edit/:id',middleWare, editView)
 page('/my-team',middleWare, myteamView)
 page('/team-home',middleWare, teamHomeView)
