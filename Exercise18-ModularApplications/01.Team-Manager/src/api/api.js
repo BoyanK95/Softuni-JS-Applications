@@ -16,12 +16,12 @@ async function request(url, options) {
             const data = response.json()
             return data
         } catch (error){
-            alert(error.message)
-            return error
+            // alert(error.message)
+            throw error
         }
     } catch (error) {
-        alert(error.message)
-        return error
+        // alert(error.message)
+        throw error
     }
 }
 
