@@ -34,7 +34,3 @@ function renderMain(content) {
     render(content, main)
 }
 
-function onLogout() {
-    logout()
-    page.redirect('/')
-}
