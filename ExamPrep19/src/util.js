@@ -19,6 +19,6 @@ export function createSubmitHandler(callback) {
         const formData = new FormData(e.target)
         const data = Object.fromEntries(formData)
 
-        callback(data)
+        callback(data, e.target)
     }
 }
