@@ -1,6 +1,8 @@
 import { logout } from "./api/user.js";
 import { render, page } from "./lib.js";
+import { getUserData } from "./util.js";
 import { showCatalog } from "./views/catalog.js";
+import { showDetails } from "./views/details.js";
 import { showHome } from "./views/home.js";
 import { showLogin } from "./views/login.js";
 import { updateNav } from "./views/nav.js";
@@ -14,7 +16,7 @@ const main = document.getElementById('content')
 page(decorateContent)
 page('/', showHome)
 page('/catalog', showCatalog)
-page('/catalog/:id', ()=> console.log('details'))
+page('/catalog/:id', showDetails)
 page('/edit/:id', ()=> console.log('edit'))
 page('/create', ()=> console.log('create'))
 page('/login', showLogin)
@@ -26,6 +28,11 @@ page.start()
 function decorateContent(ctx, next) {
     ctx.render = renderMain
     ctx.updateNav = updateNav
+
+    const user = getUserData()
+    if (user) {
+        ctx.user = user
+    }
 
     next()
 }
