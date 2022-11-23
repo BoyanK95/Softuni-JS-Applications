@@ -1,7 +1,7 @@
-import { getById } from '../api/data.js'
-import { html } from '../lib.js'
+import { deleteById, getById } from '../api/data.js'
+import { html, nothing } from '../lib.js'
 
-const detailsTemplate = (pet) => html`
+const detailsTemplate = (pet, isOwner, hasUser, onDelete) => html`
         <section id="detailsPage">
             <div class="details">
                 <div class="animalPic">
@@ -15,14 +15,13 @@ const detailsTemplate = (pet) => html`
                         <h4>Weight: ${pet.weight}</h4>
                         <h4 class="donation">Donation: 0$</h4>
                     </div>
-                    <!-- if there is no registered user, do not display div-->
+                    ${hasUser ? html`
                     <div class="actionBtn">
-                        <!-- Only for registered user and creator of the pets-->
-                        <a href="#" class="edit">Edit</a>
-                        <a href="#" class="remove">Delete</a>
-                        <!--(Bonus Part) Only for no creator and user-->
-                        <a href="#" class="donate">Donate</a>
-                    </div>
+                        ${isOwner ? html`
+                        <a href="/edit/${pet._id}" class="edit">Edit</a>
+                        <a @click=${onDelete} href="javascript:void(0)" class="remove">Delete</a>` : html`
+                        <a href="#" class="donate">Donate</a>`}
+                    </div>`: nothing}    
                 </div>
             </div>
         </section>`
@@ -32,5 +31,18 @@ export async function showDetails(ctx) {
     const id = ctx.params.id
     const pet = await getById(id)
 
-    ctx.render(detailsTemplate(pet))
+    
+    const hasUser = ctx.user
+    const isOwner = hasUser && ctx.user._id == pet._ownerId
+
+    ctx.render(detailsTemplate(pet, hasUser, isOwner, onDelete))
+
+    async function onDelete() {
+        const choice = confirm('Are you sure you want to delete this')
+        
+        if (choice) {
+            await deleteById(id)
+            ctx.page.redirect('/')
+        }
+    }
 }
