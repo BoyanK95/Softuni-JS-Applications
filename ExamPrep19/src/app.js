@@ -1,3 +1,4 @@
+import { logout } from "./api/user.js";
 import { render, page } from "./lib.js";
 import { showCatalog } from "./views/catalog.js";
 import { showHome } from "./views/home.js";
@@ -5,6 +6,8 @@ import { showLogin } from "./views/login.js";
 import { showRegister } from "./views/registration.js";
 
 const main = document.getElementById('content')
+
+document.getElementById('logoutBtn').addEventListener('click', onLogout)
 
 
 page(decorateContent)
@@ -26,4 +29,9 @@ function decorateContent(ctx, next) {
 
 function renderMain(content) {
     render(content, main)
+}
+
+function onLogout() {
+    logout()
+    page.redirect('/')
 }
