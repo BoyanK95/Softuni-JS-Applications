@@ -1,11 +1,12 @@
 import {page, render} from './lib.js'
+import { renderCatalogView } from './views/catalog.js'
 import { renderHomeView } from './views/home.js'
 
 const main = document.querySelector('main')
 
 page(decorateContect)
 page('/', renderHomeView)
-page('/memes', () => console.log('catalog'))
+page('/memes', renderCatalogView)
 page('/memes/:id', () => console.log('details'))
 page('/edit/:id', () => console.log('edit'))
 page('/login', () => console.log('login'))
