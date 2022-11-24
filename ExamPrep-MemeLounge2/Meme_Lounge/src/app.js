@@ -1,4 +1,8 @@
-import * as api from './api/api.js'
+import {page, render} from './lib.js'
 
-console.log('work!');
-window.api = api
+page('/', () => console.log('home'))
+
+
+//Start application
+page.start()
+
