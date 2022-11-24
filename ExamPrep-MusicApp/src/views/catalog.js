@@ -1,16 +1,16 @@
 import { getAll } from "../api/data.js";
-import { html } from "../lib.js";
+import { html, nothing } from "../lib.js";
 
-const catalogTemplate = (items) => html` 
+const catalogTemplate = (items, hasUser) => html` 
         <section id="catalogPage">
             <h1>All Albums</h1>
             ${items.length > 0 ?
-            items.map(i => cardTemplate(i)):
+            items.map(i => cardTemplate(i, hasUser)):
             html`<p>No Albums in Catalog!</p>`}
 
         </section>`
 
-const cardTemplate = (item) => {
+const cardTemplate = (item, hasUser) => {
   return html`
   <div class="card-box">
                 <img src=${item.imgUrl}>
@@ -22,14 +22,21 @@ const cardTemplate = (item) => {
                         <p class="price">${item.price}</p>
                         <p class="date">${item.releaseDate}</p>
                     </div>
-                    <div class="btn-group">
+
+                    ${hasUser ? 
+                      html`<div class="btn-group">
                         <a href="/details/${item._id}" id="details">Details</a>
-                    </div>
+                    </div>` :
+                    nothing
+                    }
+
+                    
                 </div>
             </div>`
 }
 
 export async function showCatalog(ctx) {
   const items = await getAll();
-  ctx.render(catalogTemplate(items));
+  const hasUser = !!ctx.user
+  ctx.render(catalogTemplate(items, hasUser));
 }
