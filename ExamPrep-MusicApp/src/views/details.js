@@ -1,7 +1,7 @@
 import { deleteById, getById } from '../api/data.js'
 import { html, nothing } from '../lib.js'
 
-const detailsTemplate = (pet, hasUser, canDonate, isOwner, onDelete) => html`
+const detailsTemplate = (item, hasUser, canDonate, isOwner, onDelete) => html`
         <section id="detailsPage">
             <div class="wrapper">
                 <div class="albumCover">
@@ -10,26 +10,29 @@ const detailsTemplate = (pet, hasUser, canDonate, isOwner, onDelete) => html`
                 <div class="albumInfo">
                     <div class="albumText">
 
-                        <h1>Name: Melodrama</h1>
-                        <h3>Artist: Lorde</h3>
-                        <h4>Genre: Pop Music</h4>
-                        <h4>Price: $7.33</h4>
-                        <h4>Date: June 16, 2017</h4>
-                        <p>Description: Melodrama is the second studio album by New Zealand singer-songwriter Lorde.
-                            It was released on 16 June 2017 by Lava and Republic Records and distributed through
-                            Universal.</p>
+                        <h1>Name: ${item.name}</h1>
+                        <h3>Artist: ${item.artist}</h3>
+                        <h4>Genre: ${item.genre}</h4>
+                        <h4>Price: ${item.price}</h4>
+                        <h4>Date: ${item.releaseDate}</h4>
+                        <p>Description: ${item.description}</p>
                     </div>
 
-                    <!-- Only for registered user and creator of the album-->
+                          <!-- Only for registered user and creator of the album-->
+                    ${hasUser && isOwner ?
+                    html`
                     <div class="actionBtn">
                         <a href="#" class="edit">Edit</a>
                         <a href="#" class="remove">Delete</a>
-                    </div>
+                    </div>`:
+                    nothing}
+                  
+                    
                 </div>
             </div>
         </section>`
 
-function petControls(pet, hasUser, canDonate, isOwner, onDelete) {
+function itemControls(item, hasUser, onDelete) {
     if (hasUser == false) {
         return nothing
     }
@@ -37,30 +40,23 @@ function petControls(pet, hasUser, canDonate, isOwner, onDelete) {
     if (isOwner) {
         return html`
          <div class="actionBtn">
-            <a href="/edit/${pet._id}" class="edit">Edit</a>
+            <a href="/edit/${item._id}" class="edit">Edit</a>
             <a @click=${onDelete} href="javascript:void(0)" class="remove">Delete</a>
         </div>`
     }
 
-    if (canDonate) {
-        return html`
-            <div class="actionBtn">
-                 <a href="#" class="donate">Donate</a>
-            </div>`
-    }
 }
 
 
 export async function showDetails(ctx) {
     const id = ctx.params.id
-    const pet = await getById(id)
+    const item = await getById(id)
 
     
     const hasUser = Boolean(ctx.user)
-    const isOwner = hasUser && ctx.user._id == pet._ownerId
-    const canDonate = true
+    const isOwner = hasUser && ctx.user._id == item._ownerId
     
-    ctx.render(detailsTemplate(pet, hasUser, canDonate, isOwner, onDelete))
+    ctx.render(detailsTemplate(item, hasUser, isOwner,isOwner, onDelete))
 
     async function onDelete() {
         const choice = confirm('Are you sure you want to delete this')

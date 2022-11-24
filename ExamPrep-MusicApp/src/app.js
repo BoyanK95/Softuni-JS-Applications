@@ -9,6 +9,7 @@ import { showHome } from "./views/home.js";
 import { showLogin } from "./views/login.js";
 import { updateNav } from "./views/nav.js";
 import { showRegister } from "./views/registrationView.js";
+import { showSearch } from "./views/search.js";
 
 const main = document.getElementById('main-content')
 
@@ -23,7 +24,7 @@ page('/create', showCreate)
 page('/details/:id', showDetails)
 page('/register', showRegister)
 page('/edit/:id', ()=> console.log('edit'))
-page('/search', ()=> console.log('search'))
+page('/search', showSearch)
 
 updateNav()
 page.start()
