@@ -3,19 +3,28 @@ import { html, nothing } from '../lib.js'
 
 const detailsTemplate = (pet, hasUser, canDonate, isOwner, onDelete) => html`
         <section id="detailsPage">
-            <div class="details">
-                <div class="animalPic">
-                    <img src=${pet.image}>
+            <div class="wrapper">
+                <div class="albumCover">
+                    <img src="./images/Lorde.jpg">
                 </div>
-                <div>
-                    <div class="animalInfo">
-                        <h1>Name: ${pet.name}</h1>
-                        <h3>Breed: ${pet.breed}</h3>
-                        <h4>Age: ${pet.age}</h4>
-                        <h4>Weight: ${pet.weight}</h4>
-                        <h4 class="donation">Donation: 0$</h4>
+                <div class="albumInfo">
+                    <div class="albumText">
+
+                        <h1>Name: Melodrama</h1>
+                        <h3>Artist: Lorde</h3>
+                        <h4>Genre: Pop Music</h4>
+                        <h4>Price: $7.33</h4>
+                        <h4>Date: June 16, 2017</h4>
+                        <p>Description: Melodrama is the second studio album by New Zealand singer-songwriter Lorde.
+                            It was released on 16 June 2017 by Lava and Republic Records and distributed through
+                            Universal.</p>
                     </div>
-                    ${petControls(pet, hasUser, canDonate, isOwner, onDelete)}    
+
+                    <!-- Only for registered user and creator of the album-->
+                    <div class="actionBtn">
+                        <a href="#" class="edit">Edit</a>
+                        <a href="#" class="remove">Delete</a>
+                    </div>
                 </div>
             </div>
         </section>`

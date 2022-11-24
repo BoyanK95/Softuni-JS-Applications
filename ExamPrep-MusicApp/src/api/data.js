@@ -1,21 +1,21 @@
 import { post, get, del, put } from "./api.js";
 
 export async function getAll() {
-    return get('/data/pets?sortBy=_createdOn%20desc&distinct=name')
+    return get('/data/albums?sortBy=_createdOn%20desc&distinct=name')
 }
 
 export async function getById(id) {
-    return get('/data/pets/' + id)
+    return get('/data/albums/' + id)
 }
 
 export async function deleteById(id) {
-    return del('/data/pets/' + id)
+    return del('/data/albums/' + id)
 }
 
-export async function createPet(petData) {
-    return post('/data/pets', petData)
+export async function createInstance(data) {
+    return post('/data/albums', data)
 }
 
-export async function editPet(id, petData) {
-    return put('/data/pets/' + id, petData)
+export async function editInstance(id, data) {
+    return put('/data/albums/' + id, data)
 }

@@ -1,37 +1,41 @@
-import { editPet, getById } from '../api/data.js'
+import { editInstance, getById } from '../api/data.js'
 import { html } from '../lib.js'
 import { createSubmitHandler } from '../util.js'
 
 
 
 const editTemplate = (pet, onEdit) => html`
-        <section id="editPage">
-            <form @submit=${onEdit} class="editForm">
-                <img src="./images/editpage-dog.jpg">
-                <div>
-                    <h2>Edit PetPal</h2>
-                    <div class="name">
-                        <label for="name">Name:</label>
-                        <input name="name" id="name" type="text"  value=${pet.name}>
+               <section class="editPage">
+            <form>
+                <fieldset>
+                    <legend>Edit Album</legend>
+
+                    <div class="container">
+                        <label for="name" class="vhide">Album name</label>
+                        <input id="name" name="name" class="name" type="text" value="In These Silent Days">
+
+                        <label for="imgUrl" class="vhide">Image Url</label>
+                        <input id="imgUrl" name="imgUrl" class="imgUrl" type="text" value="./img/BrandiCarlile.png">
+
+                        <label for="price" class="vhide">Price</label>
+                        <input id="price" name="price" class="price" type="text" value="12.80">
+
+                        <label for="releaseDate" class="vhide">Release date</label>
+                        <input id="releaseDate" name="releaseDate" class="releaseDate" type="text" value="October 1, 2021">
+
+                        <label for="artist" class="vhide">Artist</label>
+                        <input id="artist" name="artist" class="artist" type="text" value="Brandi Carlile">
+
+                        <label for="genre" class="vhide">Genre</label>
+                        <input id="genre" name="genre" class="genre" type="text" value="Low Country Sound Music">
+
+                        <label for="description" class="vhide">Description</label>
+                        <textarea name="description" class="description" rows="10"
+                            cols="10">Upon release, In These Silent Days received positive reviews from critics. At Metacritic, which assigns a normalized rating out of 100 to reviews from mainstream critics, the album has an average score of 87 out of 100, which indicates 'universal acclaim'.</textarea>
+
+                        <button class="edit-album" type="submit">Edit Album</button>
                     </div>
-                    <div class="breed">
-                        <label for="breed">Breed:</label>
-                        <input name="breed" id="breed" type="text"  value=${pet.breed}>
-                    </div>
-                    <div class="Age">
-                        <label for="age">Age:</label>
-                        <input name="age" id="age" type="text"  value=${pet.age}>
-                    </div>
-                    <div class="weight">
-                        <label for="weight">Weight:</label>
-                        <input name="weight" id="weight" type="text"  value=${pet.weight}>
-                    </div>
-                    <div class="image">
-                        <label for="image">Image:</label>
-                        <input name="image" id="image" type="text" value=${pet.image}>
-                    </div>
-                    <button class="btn" type="submit">Edit Pet</button>
-                </div>
+                </fieldset>
             </form>
         </section>`
 
@@ -41,12 +45,12 @@ export async function showEdit(ctx) {
 
     ctx.render(editTemplate(pet, createSubmitHandler(onEdit)))
 
-    async function onEdit({ name, breed, age, weight, image }, form) {
+    async function onEdit({ name, imgUrl, price, releaseDate, artist, genre, description}, form) {
         if (name == '' || breed == '' || age == '' || weight == '' || image == '') {
             return alert('All fields must be filled')
         }
 
-        await editPet(id, {
+        await editInstance(id, {
             name,
             breed,
             age,
