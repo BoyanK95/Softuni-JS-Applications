@@ -18,6 +18,7 @@ export async function login(email, password) {
 }
 
 export async function register(email, password) {
+    debugger
     const { _id, email: resultEmail, accessToken} = await post('/users/register', {email, password})
 
     setUserData({

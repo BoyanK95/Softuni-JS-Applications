@@ -8,7 +8,7 @@ import { showEdit } from "./views/edit.js";
 import { showHome } from "./views/home.js";
 import { showLogin } from "./views/login.js";
 import { updateNav } from "./views/nav.js";
-import { showRegister } from "./views/registration.js";
+import { showRegister } from "./views/registrationView.js";
 
 const main = document.getElementById('main-content')
 
@@ -17,12 +17,13 @@ const main = document.getElementById('main-content')
 
 page(decorateContent)
 page('/', showHome)
-page('/catalog', showCatalog)
-page('/catalog/:id', showDetails)
-page('/edit/:id', showEdit)
-page('/create', showCreate)
+page('/catalog', ()=> console.log('showCatalog'))
 page('/login', showLogin)
+page('/create', ()=> console.log('showCreate'))
+page('/details/:id', ()=> console.log('detailsView'))
 page('/register', showRegister)
+page('/edit/:id', ()=> console.log('edit'))
+page('/search', ()=> console.log('search'))
 
 updateNav()
 page.start()
