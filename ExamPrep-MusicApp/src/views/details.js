@@ -1,11 +1,11 @@
 import { deleteById, getById } from '../api/data.js'
 import { html, nothing } from '../lib.js'
 
-const detailsTemplate = (item, hasUser, canDonate, isOwner, onDelete) => html`
+const detailsTemplate = (item, isOwner, onDelete) => html`
         <section id="detailsPage">
             <div class="wrapper">
                 <div class="albumCover">
-                    <img src="./images/Lorde.jpg">
+                    <img src=${item.imgUrl}>
                 </div>
                 <div class="albumInfo">
                     <div class="albumText">
@@ -19,11 +19,11 @@ const detailsTemplate = (item, hasUser, canDonate, isOwner, onDelete) => html`
                     </div>
 
                           <!-- Only for registered user and creator of the album-->
-                    ${hasUser && isOwner ?
+                    ${isOwner ?
                     html`
                     <div class="actionBtn">
-                        <a href="#" class="edit">Edit</a>
-                        <a href="#" class="remove">Delete</a>
+                        <a href="/edit/${item._id}" class="edit">Edit</a>
+                        <a @click=${onDelete} href="javascript:void(0)" class="remove">Delete</a>
                     </div>`:
                     nothing}
                   
@@ -51,19 +51,18 @@ function itemControls(item, hasUser, onDelete) {
 export async function showDetails(ctx) {
     const id = ctx.params.id
     const item = await getById(id)
-
     
     const hasUser = Boolean(ctx.user)
     const isOwner = hasUser && ctx.user._id == item._ownerId
     
-    ctx.render(detailsTemplate(item, hasUser, isOwner,isOwner, onDelete))
+    ctx.render(detailsTemplate(item,isOwner, onDelete))
 
     async function onDelete() {
         const choice = confirm('Are you sure you want to delete this')
         
         if (choice) {
             await deleteById(id)
-            ctx.page.redirect('/')
+            ctx.page.redirect('/catalog')
         }
     }
 }

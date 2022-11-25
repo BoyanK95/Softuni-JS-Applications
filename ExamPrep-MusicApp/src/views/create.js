@@ -54,6 +54,6 @@ export function showCreate(ctx) {
             description,
         })
         form.reset()
-        ctx.page.redirect('/')
+        ctx.page.redirect('/catalog')
     }
 }
