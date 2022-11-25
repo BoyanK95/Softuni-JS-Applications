@@ -19,3 +19,7 @@ export async function createInstance(data) {
 export async function editInstance(id, data) {
     return put('/data/albums/' + id, data)
 }
+
+export async function search(query) {
+    return get(`/data/albums?where=name%20LIKE%20%22${query}%22`)
+}
