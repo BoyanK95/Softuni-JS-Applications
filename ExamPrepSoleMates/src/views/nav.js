@@ -12,7 +12,7 @@ const navTemplate = (hasUser) => html`
 
           <!-- Logged-in users -->
         <div class="user">
-            <a href="#">Add Pair</a>
+            <a href="/create">Add Pair</a>
             <a href="javascript:void(0)">Logout</a>
         </div>
 
