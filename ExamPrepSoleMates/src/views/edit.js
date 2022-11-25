@@ -1,64 +1,65 @@
-import { editInstance, getById } from '../api/data.js'
-import { html } from '../lib.js'
-import { createSubmitHandler } from '../util.js'
-
-
+import { editInstance, getById } from "../api/data.js";
+import { html } from "../lib.js";
+import { createSubmitHandler } from "../util.js";
 
 const editTemplate = (item, onEdit) => html`
-               <section class="editPage">
-            <form @submit=${onEdit}>
-                <fieldset>
-                    <legend>Edit Album</legend>
+<section id="edit">
+  <div class="form">
+    <h2>Edit item</h2>
+    <form @submit=${onEdit} class="edit-form">
+      <input type="text" name="brand" id="shoe-brand" placeholder=${item.brand} />
+      <input type="text" name="model" id="shoe-model" placeholder=${item.model} />
+      <input
+        type="text"
+        name="imageUrl"
+        id="shoe-img"
+        placeholder=${item.imageUrl}
+      />
+      <input
+        type="text"
+        name="release"
+        id="shoe-release"
+        placeholder=${item.release}
+      />
+      <input
+        type="text"
+        name="designer"
+        id="shoe-designer"
+        placeholder=${item.designer}
+      />
+      <input type="text" name="value" id="shoe-value" placeholder=${item.value} />
 
-                    <div class="container">
-                        <label for="name" class="vhide">Album name</label>
-                        <input id="name" name="name" class="name" type="text" .value=${item.name}>
-
-                        <label for="imgUrl" class="vhide">Image Url</label>
-                        <input id="imgUrl" name="imgUrl" class="imgUrl" type="text" .value=${item.imgUrl}>
-
-                        <label for="price" class="vhide">Price</label>
-                        <input id="price" name="price" class="price" type="text" .value=${item.price}>
-
-                        <label for="releaseDate" class="vhide">Release date</label>
-                        <input id="releaseDate" name="releaseDate" class="releaseDate" type="text" .value=${item.releaseDate}>
-
-                        <label for="artist" class="vhide">Artist</label>
-                        <input id="artist" name="artist" class="artist" type="text" .value=${item.artist}>
-
-                        <label for="genre" class="vhide">Genre</label>
-                        <input id="genre" name="genre" class="genre" type="text" .value=${item.genre}>
-
-                        <label for="description" class="vhide">Description</label>
-                        <textarea name="description" class="description" rows="10"
-                            cols="10">${item.description}</textarea>
-
-                        <button class="edit-album" type="submit">Edit Album</button>
-                    </div>
-                </fieldset>
-            </form>
-        </section>`
+      <button type="submit">post</button>
+    </form>
+  </div>
+</section>`;
 
 export async function showEdit(ctx) {
-    const id = ctx.params.id
-    const item = await getById(id)
-    ctx.render(editTemplate(item, createSubmitHandler(onEdit)))
+  const id = ctx.params.id;
+  const item = await getById(id);
+  ctx.render(editTemplate(item, createSubmitHandler(onEdit)));
 
-    async function onEdit({ name, imgUrl, price, releaseDate, artist, genre, description}, form) {
-        if (name == '' || imgUrl == '' || price == '' || releaseDate == '' || artist == '' || genre == '' || description == '') {
-            return alert('All fields must be filled')
-        }
-
-        await editInstance(id, {
-            name,
-            imgUrl,
-            price,
-            releaseDate,
-            imgUrl,
-            artist,
-            genre,
-            description,
-        })
-        ctx.page.redirect('/details/' + id)
+  async function onEdit(
+    { brand, imageUrl,model, release, designer, value},  form
+  ) {
+    if (
+        brand == "" ||
+      imageUrl == "" ||
+      release == "" ||
+      designer == "" ||
+      model == "" ||
+      value == "") {
+      return alert("All fields must be filled");
     }
+
+    await editInstance(id, {
+        brand,
+      imageUrl,
+      model,
+      release,
+      designer,
+      value,
+      });
+    ctx.page.redirect("/details/" + id);
+  }
 }
