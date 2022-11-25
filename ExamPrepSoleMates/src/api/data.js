@@ -1,7 +1,7 @@
 import { post, get, del, put } from "./api.js";
 
 export async function getAll() {
-    return get('/data/albums?sortBy=_createdOn%20desc&distinct=name')
+    return get('/data/shoes?sortBy=_createdOn%20desc')
 }
 
 export async function getById(id) {

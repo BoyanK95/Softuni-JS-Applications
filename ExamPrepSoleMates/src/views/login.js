@@ -4,10 +4,10 @@ import { createSubmitHandler } from '../util.js'
 
 
 const loginTemplate = (onLogin) => html`
-                <section id="login">
+        <section id="login">
           <div class="form">
             <h2>Login</h2>
-            <form class="login-form">
+            <form @submit=${onLogin} class="login-form">
               <input type="text" name="email" id="email" placeholder="email" />
               <input
                 type="password"
@@ -33,6 +33,6 @@ export function showLogin(ctx) {
 
         await login(email, password)
         ctx.updateNav()
-        ctx.page.redirect('/')
+        ctx.page.redirect('/catalog')
     }
 }

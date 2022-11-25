@@ -12,7 +12,6 @@ export function clearUserData() {
 }
 
 
-//option
 export function createSubmitHandler(callback) {
     return function (e) {
         e.preventDefault()

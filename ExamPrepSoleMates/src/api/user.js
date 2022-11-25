@@ -13,7 +13,8 @@ export async function login(email, password) {
     setUserData({
         _id,
         email: resultEmail,
-        accessToken
+        accessToken,
+        password
     })
 }
 
@@ -24,7 +25,8 @@ export async function register(email, password) {
     setUserData({
         _id,
         email: resultEmail,
-        accessToken
+        accessToken,
+        password
     })
 }
 

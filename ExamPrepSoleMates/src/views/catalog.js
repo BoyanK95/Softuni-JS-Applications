@@ -2,37 +2,30 @@ import { getAll } from "../api/data.js";
 import { html, nothing } from "../lib.js";
 
 const catalogTemplate = (items, hasUser) => html` 
-        <section id="catalogPage">
-            <h1>All Albums</h1>
-            ${items.length > 0 ?
-            items.map(i => cardTemplate(i, hasUser)):
-            html`<p>No Albums in Catalog!</p>`}
-
+        <section id="dashboard">
+          <h2>Collectibles</h2>
+          <ul class="card-wrapper">
+            <!-- Display a li with information about every post (if any)-->
+            
+            ${items.length > 0 ? items.map(i => cardTemplate(i)) : html`
+            <h2>There are no items added yet.</h2>`}
+          </ul>    
         </section>`
 
 const cardTemplate = (item, hasUser) => {
   return html`
-  <div class="card-box">
-                <img src=${item.imgUrl}>
-                <div>
-                    <div class="text-center">
-                        <p class="name">${item.name}</p>
-                        <p class="artist">${item.artist}</p>
-                        <p class="genre">${item.genre}</p>
-                        <p class="price">${item.price}</p>
-                        <p class="date">${item.releaseDate}</p>
-                    </div>
-
-                    ${hasUser ? 
-                      html`<div class="btn-group">
-                        <a href="/details/${item._id}" id="details">Details</a>
-                    </div>` :
-                    nothing
-                    }
-
-                    
-                </div>
-            </div>`
+ <li class="card">
+              <img src=${item.imageUrl} alt="travis" />
+              <p>
+                <strong>Brand: </strong><span class="brand">${item.brand}</span>
+              </p>
+              <p>
+                <strong>Model: </strong
+                ><span class="model">${item.model}</span>
+              </p>
+              <p><strong>Value:</strong><span class="value">${item.value}</span>$</p>
+              <a class="details-btn" href="/details/${item._id}">Details</a>
+            </li>`
 }
 
 export async function showCatalog(ctx) {
