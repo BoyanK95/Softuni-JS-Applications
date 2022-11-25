@@ -22,7 +22,7 @@ page('/catalog', () => console.log('catalog'))
 page('/login', () => console.log('login'))
 page('/create', () => console.log('create'))
 page('/details/:id', () => console.log('detailsId'))
-page('/register', () => console.log('register'))
+page('/register', showRegister)
 page('/edit/:id', () => console.log('edit'))
 page('/search', () => console.log('search'))
 
