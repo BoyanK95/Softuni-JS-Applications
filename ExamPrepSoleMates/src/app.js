@@ -24,7 +24,7 @@ page('/create', showCreate)
 page('/details/:id', showDetails)
 page('/register', showRegister)
 page('/edit/:id', showEdit)
-page('/search', () => console.log('search'))
+page('/search', showSearch)
 
 updateNav()
 page.start()
