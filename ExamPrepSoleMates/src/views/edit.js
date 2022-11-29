@@ -7,27 +7,30 @@ const editTemplate = (item, onEdit) => html`
   <div class="form">
     <h2>Edit item</h2>
     <form @submit=${onEdit} class="edit-form">
-      <input type="text" name="brand" id="shoe-brand" placeholder=${item.brand} />
-      <input type="text" name="model" id="shoe-model" placeholder=${item.model} />
+      <input type="text" name="brand" id="shoe-brand" placeholder=${item.brand} .value=${item.brand}/>
+      <input type="text" name="model" id="shoe-model" placeholder=${item.model} .value=${item.model} />
       <input
         type="text"
         name="imageUrl"
         id="shoe-img"
         placeholder=${item.imageUrl}
+        .value=${item.imageUrl}
       />
       <input
         type="text"
         name="release"
         id="shoe-release"
         placeholder=${item.release}
+        .value=${item.release}
       />
       <input
         type="text"
         name="designer"
         id="shoe-designer"
         placeholder=${item.designer}
+        .value=${item.designer}
       />
-      <input type="text" name="value" id="shoe-value" placeholder=${item.value} />
+      <input type="text" name="value" id="shoe-value" placeholder=${item.value} .value=${item.value}/>
 
       <button type="submit">post</button>
     </form>
@@ -48,7 +51,7 @@ export async function showEdit(ctx) {
       release == "" ||
       designer == "" ||
       model == "" ||
-      value == "") {
+      value == "" ) {
       return alert("All fields must be filled");
     }
 
