@@ -5,7 +5,7 @@ import { getUserData } from "../util.js";
 const nav = document.querySelector("nav");
 
 const navTemplate = (hasUser) => html` 
-<a id="catalogLink" href="index.html">Dashboard</a>
+<a id="catalogLink" href="/catalog">Dashboard</a>
     ${hasUser ? html`
     <div id="user">
     <a id="createLink" href="create.html">Create Furniture</a>
