@@ -11,20 +11,19 @@ import { updateNav } from "./views/nav.js";
 import { showRegister } from "./views/registrationView.js";
 import { showSearch } from "./views/search.js";
 
-const main = document.getElementById('main-content')
+const main = document.querySelector('main')
 
 // document.getElementById('logoutBtn').addEventListener('click', onLogout)
 
 
 page(decorateContent)
-page('/', showHome)
-page('/catalog', showCatalog)
-page('/login', showLogin)
-page('/create', showCreate)
-page('/details/:id', showDetails)
-page('/register', showRegister)
-page('/edit/:id', showEdit)
-page('/search', showSearch)
+page('/', () => console.log('home'))
+page('/catalog', () => console.log('catalog'))
+page('/login', () => console.log('login'))
+page('/create', () => console.log('create'))
+page('/details/:id', () => console.log('details'))
+page('/register', () => console.log('register'))
+page('/edit/:id', () => console.log('edit'))
 
 updateNav()
 page.start()

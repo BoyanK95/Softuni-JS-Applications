@@ -5,32 +5,28 @@ import { getUserData } from "../util.js";
 const nav = document.querySelector("nav");
 
 const navTemplate = (hasUser) => html` 
- <img src="./images/headphones.png">
-                <a href="/">Home</a>
-                <ul>
-                    <!--All user-->
-                    <li><a href="/catalog">Catalog</a></li>
-                    <li><a href="/search">Search</a></li>
-                    <!--Only guest-->
-                    ${hasUser ?
-                    html`<li><a href="/create">Create Album</a></li>
-                    <li><a @click=${onLogout} href="javascript:void(0)">Logout</a></li>`: 
-                    html`<li><a href="/login">Login</a></li>
-                    <li><a href="/register">Register</a></li>`}
-                    
-                    <!--Only user-->
-                    
-                </ul>`;
+<a id="catalogLink" href="index.html">Dashboard</a>
+    ${hasUser ? html`
+    <div id="user">
+    <a id="createLink" href="create.html">Create Furniture</a>
+    <a id="profileLink" href="my-furniture.html">My Publications</a>
+    <a @click=${onLogout} id="logoutBtn" href="javascript:void(0)">Logout</a>
+  </div>` 
+  :html`
+  <div id="guest">
+    <a id="loginLink" href="/login" class="active">Login</a>
+    <a id="registerLink" href="register">Register</a>
+  </div>`
+  }`;
 
 export function updateNav() {
-    const user = getUserData()
+  const user = getUserData();
 
-    render(navTemplate(user), nav);
+  render(navTemplate(user), nav);
 }
 
-
 function onLogout() {
-    logout()
-    updateNav()
-    page.redirect('/')
+  logout();
+  updateNav();
+  page.redirect("/");
 }
