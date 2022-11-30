@@ -3,40 +3,44 @@ import { html } from "../lib.js";
 import { createSubmitHandler } from "../util.js";
 
 const registerTemplate = (onRegister) => html` 
-        <section id="registerPage">
-            <form @submit=${onRegister}>
-                <fieldset>
-                    <legend>Register</legend>
-
-                    <label for="email" class="vhide">Email</label>
-                    <input id="email" class="email" name="email" type="text" placeholder="Email">
-
-                    <label for="password" class="vhide">Password</label>
-                    <input id="password" class="password" name="password" type="password" placeholder="Password">
-
-                    <label for="conf-pass" class="vhide">Confirm Password:</label>
-                    <input id="conf-pass" class="conf-pass" name="conf-pass" type="password" placeholder="Confirm Password">
-
-                    <button type="submit" class="register">Register</button>
-
-                    <p class="field">
-                        <span>If you already have profile click <a href="#">here</a></span>
-                    </p>
-                </fieldset>
-            </form>
-        </section>`;
+    <div class="container">
+        <div class="row space-top">
+            <div class="col-md-12">
+                <h1>Register New User</h1>
+                <p>Please fill all fields.</p>
+            </div>
+        </div>
+        <form @submit=${onRegister}>
+            <div class="row space-top">
+                <div class="col-md-4">
+                    <div class="form-group">
+                        <label class="form-control-label" for="email">Email</label>
+                        <input class="form-control" id="email" type="text" name="email">
+                    </div>
+                    <div class="form-group">
+                        <label class="form-control-label" for="password">Password</label>
+                        <input class="form-control" id="password" type="password" name="password">
+                    </div>
+                    <div class="form-group">
+                        <label class="form-control-label" for="rePass">Repeat</label>
+                        <input class="form-control" id="rePass" type="password" name="rePass">
+                    </div>
+                    <input type="submit" class="btn btn-primary" value="Register" />
+                </div>
+            </div>
+        </form>
+    </div>`;
 
 export function showRegister(ctx) {
   ctx.render(registerTemplate(createSubmitHandler(onRegister)));
 
   async function onRegister(data) {
-    if (data.email == '' || data.password == '' || !data['conf-pass']) {
+    if (data.email == '' || data.password == '' || !data.rePass) {
         return alert('Fields are empty!')
     }
-    if (data.password != data['conf-pass']) {
+    if (data.password != data.rePass) {
         return alert(`Passwords don't match!`)
     }
-    debugger
     await register(data.email, data.password)
     ctx.updateNav()
     ctx.page.redirect('/')

@@ -14,7 +14,7 @@ const navTemplate = (hasUser) => html`
   </div>` 
   :html`
   <div id="guest">
-    <a id="loginLink" href="/login" class="active">Login</a>
+    <a id="loginLink" href="/login" >Login</a>
     <a id="registerLink" href="register">Register</a>
   </div>`
   }`;
