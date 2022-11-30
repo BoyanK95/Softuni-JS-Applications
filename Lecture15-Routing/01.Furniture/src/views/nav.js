@@ -8,7 +8,7 @@ const navTemplate = (hasUser) => html`
 <a id="catalogLink" href="/catalog">Dashboard</a>
     ${hasUser ? html`
     <div id="user">
-    <a id="createLink" href="create.html">Create Furniture</a>
+    <a id="createLink" href="/create">Create Furniture</a>
     <a id="profileLink" href="my-furniture.html">My Publications</a>
     <a @click=${onLogout} id="logoutBtn" href="javascript:void(0)">Logout</a>
   </div>` 

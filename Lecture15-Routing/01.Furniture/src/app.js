@@ -21,7 +21,7 @@ page('/', () => console.log('home'))
 page('/catalog', showCatalog)
 page('/login', showLogin)
 page('/register', showRegister)
-page('/create', () => console.log('create'))
+page('/create', showCreate)
 page('/details/:id', () => console.log('details'))
 page('/edit/:id', () => console.log('edit'))
 

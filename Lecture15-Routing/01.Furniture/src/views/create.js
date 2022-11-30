@@ -4,53 +4,66 @@ import { createSubmitHandler } from '../util.js'
 
 
 const createTemplate = (onCreate) => html`
-        <section class="createPage">
-            <form @submit=${onCreate}>
-                <fieldset>
-                    <legend>Add Album</legend>
-
-                    <div class="container">
-                        <label for="name" class="vhide">Album name</label>
-                        <input id="name" name="name" class="name" type="text" placeholder="Album name">
-
-                        <label for="imgUrl" class="vhide">Image Url</label>
-                        <input id="imgUrl" name="imgUrl" class="imgUrl" type="text" placeholder="Image Url">
-
-                        <label for="price" class="vhide">Price</label>
-                        <input id="price" name="price" class="price" type="text" placeholder="Price">
-
-                        <label for="releaseDate" class="vhide">Release date</label>
-                        <input id="releaseDate" name="releaseDate" class="releaseDate" type="text" placeholder="Release date">
-
-                        <label for="artist" class="vhide">Artist</label>
-                        <input id="artist" name="artist" class="artist" type="text" placeholder="Artist">
-
-                        <label for="genre" class="vhide">Genre</label>
-                        <input id="genre" name="genre" class="genre" type="text" placeholder="Genre">
-
-                        <label for="description" class="vhide">Description</label>
-                        <textarea name="description" class="description" placeholder="Description"></textarea>
-
-                        <button class="add-album" type="submit">Add New Album</button>
+    <div class="container">
+        <div class="row space-top">
+            <div class="col-md-12">
+                <h1>Create New Furniture</h1>
+                <p>Please fill all fields.</p>
+            </div>
+        </div>
+        <form @submit=${onCreate}>
+            <div class="row space-top">
+                <div class="col-md-4">
+                    <div class="form-group">
+                        <label class="form-control-label" for="new-make">Make</label>
+                        <input class="form-control valid" id="new-make" type="text" name="make">
                     </div>
-                </fieldset>
-            </form>
-        </section>`
+                    <div class="form-group has-success">
+                        <label class="form-control-label" for="new-model">Model</label>
+                        <input class="form-control is-valid" id="new-model" type="text" name="model">
+                    </div>
+                    <div class="form-group has-danger">
+                        <label class="form-control-label" for="new-year">Year</label>
+                        <input class="form-control is-invalid" id="new-year" type="number" name="year">
+                    </div>
+                    <div class="form-group">
+                        <label class="form-control-label" for="new-description">Description</label>
+                        <input class="form-control" id="new-description" type="text" name="description">
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="form-group">
+                        <label class="form-control-label" for="new-price">Price</label>
+                        <input class="form-control" id="new-price" type="number" name="price">
+                    </div>
+                    <div class="form-group">
+                        <label class="form-control-label" for="new-image">Image</label>
+                        <input class="form-control" id="new-image" type="text" name="img">
+                    </div>
+                    <div class="form-group">
+                        <label class="form-control-label" for="new-material">Material (optional)</label>
+                        <input class="form-control" id="new-material" type="text" name="material">
+                    </div>
+                    <input type="submit" class="btn btn-primary" value="Create" />
+                </div>
+            </div>
+        </form>
+    </div>`
 
 export function showCreate(ctx) {
     ctx.render(createTemplate(createSubmitHandler(onCreate)))
 
-    async function onCreate({ name, imgUrl, price, releaseDate, artist, genre,  description}, form) {
-        if (name == '' || imgUrl == '' || price == '' || releaseDate == '' || artist == '' || genre == '' || description == '' ) {
+    async function onCreate({ make, model, price, year, img, material,  description}, form) {
+        if (make.length >= 4 || model.length >= 4 || price > 0 || year >= 1950 || year <= 2050 || img == '' || description.length > 10 ) {
             return alert('All fields must be filled')
         }
         await createInstance({
-            name,
-            imgUrl,
+            make,
+            model,
             price,
-            releaseDate,
-            artist,
-            genre,
+            year,
+            img,
+            material,
             description,
         })
         form.reset()
