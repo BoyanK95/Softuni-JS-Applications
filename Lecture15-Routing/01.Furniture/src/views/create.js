@@ -55,7 +55,7 @@ export function showCreate(ctx) {
 
     async function onCreate({ make, model, price, year, img, material,  description}, form) {
         if (make.length >= 4 || model.length >= 4 || price > 0 || year >= 1950 || year <= 2050 || img == '' || description.length > 10 ) {
-            return alert('All fields must be filled')
+            return alert('All fields must be valid!')
         }
         await createInstance({
             make,

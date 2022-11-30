@@ -13,8 +13,6 @@ import { showSearch } from "./views/search.js";
 
 const main = document.querySelector('main')
 
-// document.getElementById('logoutBtn').addEventListener('click', onLogout)
-
 
 page(decorateContent)
 page('/', () => console.log('home'))
@@ -23,7 +21,7 @@ page('/login', showLogin)
 page('/register', showRegister)
 page('/create', showCreate)
 page('/details/:id', showDetails)
-page('/edit/:id', () => console.log('edit'))
+page('/edit/:id', showEdit)
 
 updateNav()
 page.start()
