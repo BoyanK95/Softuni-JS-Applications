@@ -1,6 +1,6 @@
 # Softuni-JS-Applications: 
-  Contains the whole module of my Software-university Applications module!
-  Topicks I've worked on in this course:
+  Contains my Software-university Applications module course.
+  The topicks I've worked on in this course are:
     HTTP and REST Services
     Asynchronous Programming
     Remote Data and Authentication
